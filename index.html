@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alejandro Pacheco · Data Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #0f1117;
+      --surface:   #181c27;
+      --border:    #252b3b;
+      --accent:    #4f8ef7;
+      --accent2:   #a78bfa;
+      --text:      #e2e8f0;
+      --muted:     #8892a4;
+      --tag-bg:    #1e2535;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* LAYOUT */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-inner {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+    .hero-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .hero-text h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .hero-role {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 18px;
+      letter-spacing: 0.04em;
+    }
+    .hero-text p {
+      color: var(--muted);
+      max-width: 580px;
+      font-size: 15px;
+    }
+    .hero-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); background: transparent; }
+
+    /* SECTIONS */
+    section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--accent2);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+
+    /* SKILLS GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
+    .skill-card h3 {
+      font-size: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .skill-card ul { list-style: none; }
+    .skill-card ul li {
+      font-size: 14px;
+      color: var(--muted);
+      padding: 3px 0;
+    }
+
+    /* PROJECTS */
+    .projects-list { display: flex; flex-direction: column; gap: 20px; }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: var(--accent); }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .project-header h3 { font-size: 1rem; font-weight: 600; }
+    .project-link {
+      font-size: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      white-space: nowrap;
+    }
+    .project-card p { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 28px; }
+    .exp-item { display: flex; gap: 20px; }
+    .exp-dot {
+      margin-top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .exp-content h3 { font-size: 15px; font-weight: 600; }
+    .exp-meta {
+      font-size: 13px;
+      color: var(--accent2);
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 6px;
+    }
+    .exp-content p { font-size: 14px; color: var(--muted); }
+
+    /* EDUCATION */
+    .edu-list { display: flex; flex-direction: column; gap: 20px; }
+    .edu-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 22px;
+    }
+    .edu-item h3 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .edu-item .edu-inst {
+      font-size: 13px;
+      color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 4px;
+    }
+    .edu-item p { font-size: 13px; color: var(--muted); }
+
+    /* CONTACT */
+    .contact-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 22px;
+      font-size: 14px;
+    }
+    .contact-card span { color: var(--muted); display: block; font-size: 11px; font-family: 'IBM Plex Mono', monospace; margin-bottom: 4px; }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    @media (max-width: 600px) {
+      .hero-inner { flex-direction: column; }
+      .hero-text h1 { font-size: 1.5rem; }
+      .project-header { flex-direction: column; }
+      .nav-links { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <span class="nav-logo">alejandro.pacheco</span>
+      <div class="nav-links">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#formacion">Formación</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-photo">
+          <!-- Reemplazá este div por: <img src="foto.jpg" alt="Alejandro Pacheco" /> -->
+          foto<br/>próximamente
+        </div>
+        <div class="hero-text">
+          <h1>Alejandro Pacheco</h1>
+          <div class="hero-role">Data Analyst · Control de Gestión</div>
+          <p>
+            Analista de datos con experiencia en industria manufacturera.
+            Transformo datos operativos en reportes e indicadores que apoyan la toma de decisiones.
+            En camino hacia Data Science, con foco en Python aplicado a forecasting y análisis de negocio.
+          </p>
+          <div class="hero-links">
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/alejandro-pacheco-968325238/" target="_blank">LinkedIn</a>
+            <a class="btn btn-outline" href="https://github.com/AlejandroPacheco1202" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HABILIDADES -->
+  <section>
+    <div class="container">
+      <div class="section-label">Stack</div>
+      <h2>Herramientas y tecnologías</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Análisis</h3>
+          <ul>
+            <li>Python (pandas)</li>
+            <li>SQL</li>
+            <li>Excel avanzado</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3>Visualización</h3>
+          <ul>
+            <li>Power BI</li>
+            <li>Matplotlib</li>
+            <li>Seaborn</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3>Desarrollo</h3>
+          <ul>
+            <li>JavaScript / TypeScript</li>
+            <li>React</li>
+            <li>Node.js</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3>Cloud & otros</h3>
+          <ul>
+            <li>Google Cloud (GCP)</li>
+            <li>Git / GitHub</li>
+            <li>ERP (extracción de datos)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <div class="container">
+      <div class="section-label">Trabajo</div>
+      <h2>Proyectos</h2>
+      <div class="projects-list">
+
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Análisis de datos — Escuela de Datos Vivos</h3>
+            <a class="project-link" href="https://github.com/AlejandroPacheco1202/Entrega-Edvai" target="_blank">ver repositorio →</a>
+          </div>
+          <p>
+            Proyecto final del curso de Data Analyst. Aplicación de técnicas de limpieza,
+            análisis exploratorio y visualización sobre un dataset real, con conclusiones
+            orientadas a la toma de decisiones de negocio.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">pandas</span>
+            <span class="tag">Visualización</span>
+            <span class="tag">EDA</span>
+          </div>
+        </div>
+
+        <!-- PRÓXIMO PROYECTO — descomentá cuando tengas uno nuevo -->
+        <!--
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Nombre del proyecto</h3>
+            <a class="project-link" href="#" target="_blank">ver repositorio →</a>
+          </div>
+          <p>Descripción breve del proyecto y su impacto.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+          </div>
+        </div>
+        -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section id="experiencia">
+    <div class="container">
+      <div class="section-label">Trayectoria</div>
+      <h2>Experiencia</h2>
+      <div class="exp-list">
+        <div class="exp-item">
+          <div class="exp-dot"></div>
+          <div class="exp-content">
+            <h3>Control de Gestión · Data Analyst</h3>
+            <div class="exp-meta">Industria alimenticia (pan congelado) · Actual</div>
+            <p>
+              Responsable de los informes de ventas, control presupuestario y reportes operativos
+              para una Pyme de ~100 personas. Mantenimiento y desarrollo de dashboards en Power BI,
+              procesamiento de datos exportados desde ERP hacia Excel y análisis de indicadores clave.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMACIÓN -->
+  <section id="formacion">
+    <div class="container">
+      <div class="section-label">Educación</div>
+      <h2>Formación</h2>
+      <div class="edu-list">
+        <div class="edu-item">
+          <h3>Licenciatura en Sistemas</h3>
+          <div class="edu-inst">UNGS · En curso</div>
+          <p>Carrera universitaria en curso. Formación en fundamentos de sistemas, algoritmos, bases de datos y desarrollo de software.</p>
+        </div>
+        <div class="edu-item">
+          <h3>Curso de Data Analyst</h3>
+          <div class="edu-inst">Escuela de Datos Vivos · 2024</div>
+          <p>Análisis exploratorio, visualización de datos, SQL aplicado y nociones de Google Cloud Platform (GCP).</p>
+        </div>
+        <div class="edu-item">
+          <h3>Desarrollo Full Stack</h3>
+          <div class="edu-inst">Digital House</div>
+          <p>Formación en desarrollo web con stack MERN (MongoDB, Express, React, Node.js).</p>
+        </div>
+        <div class="edu-item">
+          <h3>Data Science</h3>
+          <div class="edu-inst">Digital House</div>
+          <p>Fundamentos de machine learning, pandas, visualización y algoritmos de clasificación y regresión.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="container">
+      <div class="section-label">Contacto</div>
+      <h2>Hablemos</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <span>LinkedIn</span>
+          <a href="https://www.linkedin.com/in/alejandro-pacheco-968325238/" target="_blank">alejandro-pacheco</a>
+        </div>
+        <div class="contact-card">
+          <span>GitHub</span>
+          <a href="https://github.com/AlejandroPacheco1202" target="_blank">AlejandroPacheco1202</a>
+        </div>
+        <div class="contact-card">
+          <span>Ubicación</span>
+          <span style="color: var(--text)">Buenos Aires, Argentina</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 Alejandro Pacheco · Hecho con HTML & GitHub Pages
+    </div>
+  </footer>
+
+</body>
+</html>
